@@ -1,61 +1,73 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
-export default createStore({
+const getInitialTheme = () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) return savedTheme;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const store = createStore({
   state: {
-    workflow: {
-      name: 'CI',
-      on: 'push',
-      jobs: {},
-    },
-    elements: [], // Canvas elements
+    theme: getInitialTheme(),
+    notifications: [
+      "New workflow added",
+      "Pipeline completed successfully",
+      "New user registered",
+    ],
   },
   mutations: {
-    SET_WORKFLOW_NAME(state, name) {
-      state.workflow.name = name;
+    TOGGLE_THEME(state) {
+      state.theme = state.theme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", state.theme);
+      document.documentElement.setAttribute("data-theme", state.theme);
     },
-    SET_WORKFLOW_ON(state, on) {
-      state.workflow.on = on;
+    CLEAR_NOTIFICATIONS(state) {
+      state.notifications = [];
     },
-    ADD_JOB(state, job) {
-      state.workflow.jobs[job.id] = job.details;
+    ADD_NOTIFICATION(state, notification) {
+      state.notifications.push(notification);
     },
-    ADD_ELEMENT(state, element) {
-      state.elements.push(element);
-    },
-    UPDATE_ELEMENT_POSITION(state, { id, x, y }) {
-      const element = state.elements.find(el => el.id === id);
-      if (element) {
-        element.x = x;
-        element.y = y;
-      }
-    },
-    REMOVE_ELEMENT(state, id) {
-      state.elements = state.elements.filter(el => el.id !== id);
+    SET_NOTIFICATIONS(state, notifications) {
+      state.notifications = notifications;
     },
   },
   actions: {
-    setWorkflowName({ commit }, name) {
-      commit('SET_WORKFLOW_NAME', name);
+    toggleTheme({ commit }) {
+      commit("TOGGLE_THEME");
     },
-    setWorkflowOn({ commit }, on) {
-      commit('SET_WORKFLOW_ON', on);
+    clearNotifications({ commit }) {
+      commit("CLEAR_NOTIFICATIONS");
     },
-    addJob({ commit }, job) {
-      commit('ADD_JOB', job);
+    addNotification({ commit }, notification) {
+      commit("ADD_NOTIFICATION", notification);
     },
-    addElement({ commit }, element) {
-      commit('ADD_ELEMENT', element);
-    },
-    updateElementPosition({ commit }, payload) {
-      commit('UPDATE_ELEMENT_POSITION', payload);
-    },
-    removeElement({ commit }, id) {
-      commit('REMOVE_ELEMENT', id);
+    setNotifications({ commit }, notifications) {
+      commit("SET_NOTIFICATIONS", notifications);
     },
   },
   getters: {
-    getWorkflow: state => state.workflow,
-    getElements: state => state.elements,
+    isDarkTheme: (state) => state.theme === "dark",
+    getNotifications: (state) => state.notifications,
   },
-  modules: {},
 });
+
+// Initialize theme
+if (typeof window !== "undefined") {
+  // Set initial theme
+  document.documentElement.setAttribute("data-theme", store.state.theme);
+
+  // Listen for system theme changes
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        const newTheme = e.matches ? "dark" : "light";
+        store.state.theme = newTheme;
+        document.documentElement.setAttribute("data-theme", newTheme);
+      }
+    });
+}
+
+export default store;

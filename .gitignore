@@ -22,5 +22,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-#development
+# Development environment configuration and PlanOut experiments
 .tmp
