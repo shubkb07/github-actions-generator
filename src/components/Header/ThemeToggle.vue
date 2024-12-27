@@ -15,8 +15,11 @@ export default {
 	setup() {
 		const store = useStore();
 		const isDark = computed(() => store.getters.isDarkTheme);
-		const toggleTheme = () => store.dispatch('toggleTheme');
-
+		const toggleTheme = () => {
+			store.dispatch('toggleTheme')
+			document.documentElement.classList.toggle('my-app-dark');
+		};
+		isDark.value && document.documentElement.classList.add('my-app-dark');
 		return { isDark, toggleTheme };
 	}
 };

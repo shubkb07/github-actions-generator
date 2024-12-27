@@ -1,11 +1,12 @@
 import { createStore } from "vuex";
+import axios from "axios";
 
 const getInitialTheme = () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme) return savedTheme;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+    ? "light"
+    : "dark";
 };
 
 const store = createStore({
@@ -16,6 +17,8 @@ const store = createStore({
       "Pipeline completed successfully",
       "New user registered",
     ],
+    logged: "no",
+    request_token: "",
   },
   mutations: {
     TOGGLE_THEME(state) {
@@ -32,6 +35,10 @@ const store = createStore({
     SET_NOTIFICATIONS(state, notifications) {
       state.notifications = notifications;
     },
+    SET_LOGIN_STATUS(state, { logged, request_token }) {
+      state.logged = logged;
+      state.request_token = request_token;
+    },
   },
   actions: {
     toggleTheme({ commit }) {
@@ -46,14 +53,37 @@ const store = createStore({
     setNotifications({ commit }, notifications) {
       commit("SET_NOTIFICATIONS", notifications);
     },
+    async checkLogin({ commit }) {
+      console.log("Checking login status");
+      try {
+        const token = document.cookie
+          .split("; ")
+          .find(row => row.startsWith("auth="))
+          ?.split("=")[1];
+        if (token) {
+          const response = await axios.get(`https://begag.loc/api/auth?action=check&token=${token}`);
+          if (response.data.status === "success") {
+            commit("SET_LOGIN_STATUS", { logged: "yes", request_token: response.data.request_token });
+          } else {
+            commit("SET_LOGIN_STATUS", { logged: "no", request_token: "" });
+          }
+        } else {
+          commit("SET_LOGIN_STATUS", { logged: "no", request_token: "" });
+        }
+      } catch (error) {
+        commit("SET_LOGIN_STATUS", { logged: "no", request_token: "" });
+      }
+    },
   },
   getters: {
     isDarkTheme: (state) => state.theme === "dark",
     getNotifications: (state) => state.notifications,
+    isLoggedIn: (state) => state.logged === "yes",
+    getRequestToken: (state) => state.request_token,
   },
 });
 
-// Initialize theme
+// Initialize theme and check login status
 if (typeof window !== "undefined") {
   // Set initial theme
   document.documentElement.setAttribute("data-theme", store.state.theme);
@@ -68,6 +98,9 @@ if (typeof window !== "undefined") {
         document.documentElement.setAttribute("data-theme", newTheme);
       }
     });
+
+  // Check login status
+  store.dispatch("checkLogin");
 }
 
 export default store;
