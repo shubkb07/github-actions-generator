@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<h1>404</h1>
-		<p>Page App</p>
+		<h1>AppView</h1>
+		<p>Page AppView</p>
 	</div>
 </template>
 

@@ -9,6 +9,10 @@ const getInitialTheme = () => {
     : "dark";
 };
 
+const getAPIHost = () => {
+  return ( process.env.NODE_ENV === "development" ? 'http://localhost:3000' : document.location.origin ) + '/api';
+};
+
 const store = createStore({
   state: {
     theme: getInitialTheme(),
@@ -19,6 +23,9 @@ const store = createStore({
     ],
     logged: "no",
     request_token: "",
+    api_host: getAPIHost(),
+    client_id: "Ov23liiXO4iDgC1mHAtO",
+    client_callback: document.location.origin + "/login",
   },
   mutations: {
     TOGGLE_THEME(state) {
@@ -53,7 +60,7 @@ const store = createStore({
     setNotifications({ commit }, notifications) {
       commit("SET_NOTIFICATIONS", notifications);
     },
-    async checkLogin({ commit }) {
+    async checkLogin({ commit, state }) {
       console.log("Checking login status");
       try {
         const token = document.cookie
@@ -61,7 +68,7 @@ const store = createStore({
           .find(row => row.startsWith("auth="))
           ?.split("=")[1];
         if (token) {
-          const response = await axios.get(`https://begag.loc/api/auth?action=check&token=${token}`);
+          const response = await axios.get(`${state.api_host}/auth?action=check&token=${token}`);
           if (response.data.status === "success") {
             commit("SET_LOGIN_STATUS", { logged: "yes", request_token: response.data.request_token });
           } else {
@@ -80,6 +87,9 @@ const store = createStore({
     getNotifications: (state) => state.notifications,
     isLoggedIn: (state) => state.logged === "yes",
     getRequestToken: (state) => state.request_token,
+    getAPIHost: (state) => state.api_host,
+    getClientId: (state) => state.client_id,
+    getClientCallback: (state) => state.client_callback,
   },
 });
 
@@ -98,9 +108,6 @@ if (typeof window !== "undefined") {
         document.documentElement.setAttribute("data-theme", newTheme);
       }
     });
-
-  // Check login status
-  store.dispatch("checkLogin");
 }
 
 export default store;

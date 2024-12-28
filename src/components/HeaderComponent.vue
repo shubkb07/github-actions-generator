@@ -3,18 +3,19 @@
 		<Menubar :model="menuItems" class="header-menu">
 			<template #start>
 				<span class="font-bold logo">
-					<span class="hidden sm:inline">GAG</span>
+					<span class="hidden sm:inline">{{$route.name === 'Dashboard App Edit' ? 'G' : 'GAG'}}</span>
 					<span class="inline sm:hidden">G</span>
-				</span>
+				</span> &nbsp;&nbsp;&nbsp;&nbsp;
+				<span v-if="isDashboardAppEdit" class="font-bold logo-text" contenteditable="true">App Generator</span>
 			</template>
 			<template #end>
 				<div class="header-actions">
 					<ThemeToggle />
 					<NotificationPanel />
 					<ProfilePanel />
-					<div v-if="$route.name === 'Dashboard App Edit' || $route.name === 'Dashboard App'">
-						<ExportComponent />
-					</div>
+					<Button v-if="!logged" @click="$router.push('/login')">Login</Button>
+					<Button v-if="logged && !isDashboard" @click="$router.push('/dashboard')">Dashboard</Button>
+					<ExportComponent v-if="logged && isDashboardAppEdit" />
 				</div>
 			</template>
 		</Menubar>
@@ -33,6 +34,24 @@ import ExportComponent from './App/Edit/ExportComponent.vue';
 
 export default {
 	name: 'HeaderComponent',
+	props: {
+		logged: {
+			type: Boolean,
+			required: true
+		},
+		isDashboard: {
+			type: Boolean,
+			required: true
+		},
+		isDashboardApp: {
+			type: Boolean,
+			required: true
+		},
+		isDashboardAppEdit: {
+			type: Boolean,
+			required: true
+		}
+	},
 	components: {
 		Menubar,
 		Toast,
@@ -72,12 +91,13 @@ export default {
 	left: 0;
 	width: 100%;
 	z-index: 1000;
-	transition: all 0.3s ease;
+	transition: all 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .header.scrolled {
 	background-color: var(--surface-overlay);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
 }
 
 .header-menu {

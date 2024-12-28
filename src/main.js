@@ -1,4 +1,4 @@
-import { createSSRApp } from "vue";
+import { createApp } from "vue";
 // import { renderToString } from "vue/server-renderer";
 import App from "./App.vue";
 import router from "./router";
@@ -19,7 +19,7 @@ import Listbox from "primevue/listbox";
 import ToastService from "primevue/toastservice";
 import Toast from "primevue/toast";
 
-createSSRApp(App)
+createApp(App)
   .use(PrimeVue, {
     ripple: true,
     theme: {

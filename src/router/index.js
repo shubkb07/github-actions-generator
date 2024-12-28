@@ -34,22 +34,22 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: 'Dashboard',
     component: DashboardView,
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: LoginView,
   },
   {
     path: '/dashboard/app',
-    name: 'app',
+    name: 'Dashboard App',
     component: DashboardAppView,
   },
   {
     path: '/dashboard/app/:add_id',
-    name: 'Dashboard App',
+    name: 'Dashboard App View',
     component: DashboardAppInView,
     props: true, // Allows route params to be passed as props
   },

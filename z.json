@@ -1,0 +1,552 @@
+{
+	"_events": {},
+	"_readableState": {
+		"highWaterMark": 16384,
+		"buffer": [],
+		"bufferIndex": 0,
+		"length": 0,
+		"pipes": [],
+		"awaitDrainWriters": null
+	},
+	"socket": {
+		"connecting": false,
+		"_hadError": false,
+		"_parent": null,
+		"_host": null,
+		"_closeAfterHandlingError": false,
+		"_events": {
+			"close": [
+				null,
+				null
+			],
+			"end": [
+				null,
+				null
+			]
+		},
+		"_readableState": {
+			"highWaterMark": 16384,
+			"buffer": [],
+			"bufferIndex": 0,
+			"length": 0,
+			"pipes": [],
+			"awaitDrainWriters": null
+		},
+		"_writableState": {
+			"highWaterMark": 16384,
+			"length": 0,
+			"corked": 0,
+			"writelen": 0,
+			"bufferedIndex": 0,
+			"pendingcb": 0
+		},
+		"allowHalfOpen": true,
+		"_eventsCount": 8,
+		"_sockname": null,
+		"_pendingData": null,
+		"_pendingEncoding": "",
+		"server": {
+			"requestTimeout": 300000,
+			"headersTimeout": 60000,
+			"keepAliveTimeout": 5000,
+			"connectionsCheckingInterval": 30000,
+			"requireHostHeader": true,
+			"rejectNonStandardBodyWrites": false,
+			"_events": {},
+			"_eventsCount": 3,
+			"_connections": 1,
+			"_handle": {
+				"reading": false
+			},
+			"_usingWorkers": false,
+			"_workers": [],
+			"_unref": false,
+			"_listeningId": 2,
+			"allowHalfOpen": true,
+			"pauseOnConnect": false,
+			"noDelay": true,
+			"keepAlive": false,
+			"keepAliveInitialDelay": 0,
+			"highWaterMark": 16384,
+			"httpAllowHalfOpen": false,
+			"timeout": 0,
+			"maxHeadersCount": null,
+			"maxRequestsPerSocket": 0,
+			"_connectionKey": "6::::3000"
+		},
+		"_server": "[Circular]",
+		"parser": {
+			"0": null,
+			"_headers": [],
+			"_url": "",
+			"socket": "[Circular]",
+			"incoming": "[Circular]",
+			"outgoing": null,
+			"maxHeaderPairs": 2000,
+			"_consumed": true,
+			"joinDuplicateHeaders": null
+		},
+		"_paused": false,
+		"_httpMessage": {
+			"_events": {},
+			"_eventsCount": 1,
+			"outputData": [],
+			"outputSize": 0,
+			"writable": true,
+			"destroyed": false,
+			"_last": false,
+			"chunkedEncoding": false,
+			"shouldKeepAlive": true,
+			"maxRequestsOnConnectionReached": false,
+			"_defaultKeepAlive": true,
+			"useChunkedEncodingByDefault": true,
+			"sendDate": true,
+			"_removedConnection": false,
+			"_removedContLen": false,
+			"_removedTE": false,
+			"strictContentLength": false,
+			"_contentLength": null,
+			"_hasBody": true,
+			"_trailer": "",
+			"finished": false,
+			"_headerSent": false,
+			"_closed": false,
+			"_header": null,
+			"_keepAliveTimeout": 5000,
+			"req": "[Circular]",
+			"_sent100": false,
+			"_expect_continue": false,
+			"_maxRequestsPerSocket": 0,
+			"locals": {}
+		},
+		"timeout": 0
+	},
+	"httpVersionMajor": 1,
+	"httpVersionMinor": 1,
+	"httpVersion": "1.1",
+	"complete": false,
+	"rawHeaders": [
+		"Host",
+		"localhost:3000",
+		"Connection",
+		"keep-alive",
+		"Content-Length",
+		"72",
+		"sec-ch-ua-platform",
+		""Windows"",
+		"User-Agent",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+		"Accept",
+		"application/json, text/plain, */*",
+		"sec-ch-ua",
+		""Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"",
+		"Content-Type",
+		"application/json",
+		"sec-ch-ua-mobile",
+		"?0",
+		"Origin",
+		"http://localhost:8080",
+		"Sec-Fetch-Site",
+		"same-site",
+		"Sec-Fetch-Mode",
+		"cors",
+		"Sec-Fetch-Dest",
+		"empty",
+		"Referer",
+		"http://localhost:8080/",
+		"Accept-Encoding",
+		"gzip, deflate, br, zstd",
+		"Accept-Language",
+		"en-GB,en-US;q=0.9,en;q=0.8,hi;q=0.7"
+	],
+	"rawTrailers": [],
+	"joinDuplicateHeaders": null,
+	"aborted": false,
+	"upgrade": false,
+	"url": "/api/login",
+	"method": "POST",
+	"statusCode": null,
+	"statusMessage": null,
+	"client": "[Circular]",
+	"_consuming": false,
+	"_dumped": false,
+	"baseUrl": "",
+	"originalUrl": "/api/login",
+	"_parsedUrl": {
+		"protocol": null,
+		"slashes": null,
+		"auth": null,
+		"host": null,
+		"port": null,
+		"hostname": null,
+		"hash": null,
+		"search": null,
+		"query": null,
+		"pathname": "/api/login",
+		"path": "/api/login",
+		"href": "/api/login",
+		"_raw": "/api/login"
+	},
+	"params": {
+		"0": "login"
+	},
+	"query": {},
+	"res": "[Circular]",
+	"route": {
+		"path": "/api/*",
+		"stack": [
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "acl"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "bind"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "checkout"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "connect"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "copy"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "delete"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "get"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "head"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "link"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "lock"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "m-search"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "merge"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "mkactivity"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "mkcalendar"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "mkcol"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "move"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "notify"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "options"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "patch"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "post"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "propfind"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "proppatch"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "purge"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "put"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "query"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "rebind"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "report"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "search"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "source"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "subscribe"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "trace"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "unbind"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "unlink"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "unlock"
+			},
+			{
+				"name": "<anonymous>",
+				"keys": [],
+				"regexp": {
+					"fast_star": false,
+					"fast_slash": false
+				},
+				"method": "unsubscribe"
+			}
+		],
+		"methods": {
+			"acl": true,
+			"bind": true,
+			"checkout": true,
+			"connect": true,
+			"copy": true,
+			"delete": true,
+			"get": true,
+			"head": true,
+			"link": true,
+			"lock": true,
+			"m-search": true,
+			"merge": true,
+			"mkactivity": true,
+			"mkcalendar": true,
+			"mkcol": true,
+			"move": true,
+			"notify": true,
+			"options": true,
+			"patch": true,
+			"post": true,
+			"propfind": true,
+			"proppatch": true,
+			"purge": true,
+			"put": true,
+			"query": true,
+			"rebind": true,
+			"report": true,
+			"search": true,
+			"source": true,
+			"subscribe": true,
+			"trace": true,
+			"unbind": true,
+			"unlink": true,
+			"unlock": true,
+			"unsubscribe": true
+		}
+	}
+}

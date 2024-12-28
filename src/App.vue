@@ -1,19 +1,26 @@
 <template>
   <div v-if="loading" class="loading">Loading...</div>
   <div v-else>
-    <HeaderComponent/>
-    <div class="content">
-      <router-view/>
+    {{ isDashboard && !logged ? $router.push('/login') : ''}}
+    <div v-if="$route.name !== 'Login'">
+      <HeaderComponent :logged=logged :isDashboard=isDashboard :isDashboardApp=isDashboardApp :isDashboardAppEdit=isDashboardAppEdit />
+      <div class="content">
+        <router-view />
+      </div>
+    <FooterComponent :logged=logged :isDashboard=isDashboard :isDashboardApp=isDashboardApp :isDashboardAppEdit=isDashboardAppEdit />
     </div>
-    <FooterComponent/>
+    <div v-else>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import HeaderComponent from './components/HeaderComponent.vue';
-import FooterComponent from './components/AppFooterComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
 export default {
   name: 'App',
@@ -23,18 +30,29 @@ export default {
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
     const loading = ref(true);
+    const logged = ref(false);
+    const request_token = ref('');
+    const isDashboard = computed(() => route.name && route.name.startsWith('Dashboard'));
+    const isDashboardApp = computed(() => route.name && route.name.startsWith('Dashboard App'));
+    const isDashboardAppEdit = computed(() => route.name && route.name.startsWith('Dashboard App Edit'));
 
     onMounted(async () => {
       await store.dispatch('checkLogin');
       loading.value = false;
-      const logged = store.getters.isLoggedIn;
-      const request_token = store.getters.getRequestToken;
-      console.log(logged, request_token);
+      logged.value = store.getters.isLoggedIn;
+      request_token.value = store.getters.getRequestToken;
+      console.log(logged.value, request_token.value);
     });
 
     return {
-      loading
+      loading,
+      logged,
+      request_token,
+      isDashboard,
+      isDashboardApp,
+      isDashboardAppEdit
     };
   }
 }
