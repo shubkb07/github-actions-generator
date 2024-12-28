@@ -24,3 +24,4 @@ pnpm-debug.log*
 
 # Development environment configuration and PlanOut experiments
 .tmp
+.env
