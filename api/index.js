@@ -46,27 +46,18 @@ app.all("/api/*", async (req, res) => {
   api(req, res);
 });
 
-if (isProd) {
-  // Serve static files from the dist directory
-  app.use(express.static(path.join(__dirname, "dist")));
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, "dist")));
 
-  // Handle SPA routing, return index.html for any unknown routes except /api/*
-  app.all("*", (req, res) => {
-    if (req.path.startsWith("/api")) {
-      api(req, res);
-    } else {
-      res.sendFile(path.join(__dirname, "dist", "index.html"));
-    }
-  });
-} else {
-  app.all("*", (req, res) => {
-    if (req.path.startsWith("/api")) {
-      api(req, res);
-    } else {
-      res.json({ status: "failed" });
-    }
-  });
-}
+// Handle SPA routing, return index.html for any unknown routes except /api/*
+app.all("*", (req, res) => {
+  if (req.path.startsWith("/api")) {
+    api(req, res);
+  } else {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`port running at http://localhost:${port}`);
