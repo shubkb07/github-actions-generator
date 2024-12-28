@@ -71,3 +71,5 @@ if (isProd) {
 app.listen(port, () => {
   console.log(`port running at http://localhost:${port}`);
 });
+
+module.exports = app;
