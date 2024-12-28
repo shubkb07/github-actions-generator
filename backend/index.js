@@ -5,7 +5,7 @@ var cors = require('cors')
 const isProd = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 3000;
 const dotenv = require("dotenv");
-const api = require('./src/server/api');
+const api = require('./api');
 
 dotenv.config();
 

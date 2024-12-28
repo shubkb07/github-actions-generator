@@ -9,10 +9,6 @@ const getInitialTheme = () => {
     : "dark";
 };
 
-const getAPIHost = () => {
-  return ( process.env.NODE_ENV === "development" ? 'http://localhost:3000' : document.location.origin ) + '/api';
-};
-
 const store = createStore({
   state: {
     theme: getInitialTheme(),
@@ -23,7 +19,7 @@ const store = createStore({
     ],
     logged: "no",
     request_token: "",
-    api_host: getAPIHost(),
+    api_host: document.location.origin  + '/api',
     client_id: "Ov23liiXO4iDgC1mHAtO",
     client_callback: document.location.origin + "/login",
   },
