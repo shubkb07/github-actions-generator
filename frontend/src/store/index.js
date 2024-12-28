@@ -63,10 +63,18 @@ const store = createStore({
           .find(row => row.startsWith("auth="))
           ?.split("=")[1];
         if (token) {
-          const response = await axios.post(`${state.api_host}/auth`, {
-            action: "check",
-            token: token
-          });
+          const response = await axios.post(
+            `${state.api_host}/auth`,
+            {
+              action: "check",
+              token: token
+            },
+            {
+              headers: {
+                Authorization: "Bearer lFMp9C1CLrsnfksN30h30aFjl9yk7ug9mHC8HwXtpU4bhVAEwReziDQxe8bQ2utQ"
+              }
+            }
+          );
           if (response.data.status === "success") {
             commit("SET_LOGIN_STATUS", { logged: "yes", request_token: token });
           } else {
