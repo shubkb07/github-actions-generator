@@ -13,7 +13,8 @@ const callBeAPI = async (apiPath, data) => {
   try {
     // Add bearer token to the request headers
     const bearerToken = 'lFMp9C1CLrsnfksN30h30aFjl9yk7ug9mHC8HwXtpU4bhVAEwReziDQxe8bQ2utQ';
-    const response = await axios.post(process.env.BE_SERVER + apiPath, data, {
+    const apiServer = process.env.BE_SERVER ? process.env.BE_SERVER : "https://begag.shubkb.com/api";
+    const response = await axios.post(apiServer + apiPath, data, {
       headers: {
         'Authorization': `Bearer ${bearerToken}`
       }
