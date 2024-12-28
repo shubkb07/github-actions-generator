@@ -11,7 +11,7 @@ onMounted(() => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path: "/animations/workflow-builder.json",
+      path: "@/animations/workflow-builder.json",
     });
   }
 });

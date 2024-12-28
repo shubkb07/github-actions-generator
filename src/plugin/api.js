@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useStore } from "vuex";
 
-const apiCall = async (action, params) => {
+const apiCall = async (action, params={}) => {
   const store = useStore();
   const api_host = store.getters.getAPIHost;
   const user = {
@@ -10,8 +10,9 @@ const apiCall = async (action, params) => {
   };
   let response;
   try {
+    console.log(user);
     // Send POST request to the API param as JSON.
-    response = await axios.post(`${api_host}/${action}`, { ...params, user });
+    response = await axios.post(`${api_host}/${action}`, { data: params, user });
     return response.data;
   } catch (error) {
     console.error("API call failed", error);

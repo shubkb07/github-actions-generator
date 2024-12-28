@@ -87,7 +87,6 @@ export default {
 		const clock = ref('');
 
 		onMounted(() => {
-			console.log('FooterComponent unmounted');
 			setInterval(() => {
 				const date = new Date();
 				const day = date.getDate().toString().padStart(2, '0');

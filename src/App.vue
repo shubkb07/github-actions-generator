@@ -43,7 +43,6 @@ export default {
       loading.value = false;
       logged.value = store.getters.isLoggedIn;
       request_token.value = store.getters.getRequestToken;
-      console.log(logged.value, request_token.value);
     });
 
     return {

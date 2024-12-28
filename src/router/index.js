@@ -5,6 +5,7 @@ import ContactView from '../views/ContactView.vue';
 import ServicesView from '../views/ServicesView.vue';
 import DashboardView from '../views/DashboardView.vue';
 import LoginView from '../views/LoginView.vue';
+import LogoutView from '../views/LogoutView.vue';
 import DashboardAppView from '../views/DashboardAppView.vue';
 import DashboardAppInView from '../views/DashboardAppInView.vue';
 import DashboardAppEditView from '../views/DashboardAppEditView.vue';
@@ -41,6 +42,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginView,
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: LogoutView,
   },
   {
     path: '/dashboard/app',

@@ -18,13 +18,11 @@ const callBeAPI = async (apiPath, data) => {
   try {
     // Add bearer token to the request headers
     const bearerToken = 'lFMp9C1CLrsnfksN30h30aFjl9yk7ug9mHC8HwXtpU4bhVAEwReziDQxe8bQ2utQ';
-    console.log(process.env.BE_SERVER + apiPath);
     const response = await axios.post(process.env.BE_SERVER + apiPath, data, {
       headers: {
         'Authorization': `Bearer ${bearerToken}`
       }
     });
-    console.log(response.data);
     if (response.data.status === "error") {
       return Promise.reject(response.data);
     }

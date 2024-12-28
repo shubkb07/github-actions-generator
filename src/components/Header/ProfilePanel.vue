@@ -22,7 +22,7 @@
                 <span class="text-primary font-bold">{{ item.label }}</span>
             </template>
             <template #item="{ item, props }">
-                <a v-ripple class="flex items-center" v-bind="props.action">
+                <a v-ripple class="flex items-center" v-bind="props.action" :href="item.route">
                     <span :class="item.icon" />
                     <span>{{ item.label }}</span>
                     <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
@@ -56,11 +56,13 @@ const items = ref([
         items: [
             {
                 label: 'Refresh',
-                icon: 'pi pi-refresh'
+                icon: 'pi pi-refresh',
+                route: '/refresh'
             },
             {
-                label: 'Export',
-                icon: 'pi pi-upload'
+                label: 'Logout',
+                icon: 'pi pi-upload',
+                route: '/logout'
             }
         ]
     }

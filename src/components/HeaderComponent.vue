@@ -10,9 +10,10 @@
 			</template>
 			<template #end>
 				<div class="header-actions">
+					<MenuLinks v-if="!isDashboard" />
 					<ThemeToggle />
-					<NotificationPanel />
-					<ProfilePanel />
+					<NotificationPanel v-if="logged" />
+					<ProfilePanel v-if="logged" />
 					<Button v-if="!logged" @click="$router.push('/login')">Login</Button>
 					<Button v-if="logged && !isDashboard" @click="$router.push('/dashboard')">Dashboard</Button>
 					<ExportComponent v-if="logged && isDashboardAppEdit" />
@@ -30,6 +31,7 @@ import Toast from 'primevue/toast';
 import ThemeToggle from './Header/ThemeToggle.vue';
 import NotificationPanel from './Header/NotificationPanel.vue';
 import ProfilePanel from './Header/ProfilePanel.vue';
+import MenuLinks from './Header/MenuLinks.vue';
 import ExportComponent from './App/Edit/ExportComponent.vue';
 
 export default {
@@ -58,7 +60,8 @@ export default {
 		ThemeToggle,
 		NotificationPanel,
 		ProfilePanel,
-		ExportComponent
+		ExportComponent,
+		MenuLinks
 	},
 	setup() {
 		const isScrolled = ref(false);

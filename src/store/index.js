@@ -61,16 +61,18 @@ const store = createStore({
       commit("SET_NOTIFICATIONS", notifications);
     },
     async checkLogin({ commit, state }) {
-      console.log("Checking login status");
       try {
         const token = document.cookie
           .split("; ")
           .find(row => row.startsWith("auth="))
           ?.split("=")[1];
         if (token) {
-          const response = await axios.get(`${state.api_host}/auth?action=check&token=${token}`);
+          const response = await axios.post(`${state.api_host}/auth`, {
+            action: "check",
+            token: token
+          });
           if (response.data.status === "success") {
-            commit("SET_LOGIN_STATUS", { logged: "yes", request_token: response.data.request_token });
+            commit("SET_LOGIN_STATUS", { logged: "yes", request_token: token });
           } else {
             commit("SET_LOGIN_STATUS", { logged: "no", request_token: "" });
           }
