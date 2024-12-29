@@ -13,9 +13,6 @@ const store = createStore({
     notifications: ['New workflow added', 'Pipeline completed successfully', 'New user registered'],
     logged: 'no',
     request_token: '',
-    api_host: 'https://begag.shubkb.com/api',
-    client_id: 'Ov23liOpEQTs0HIPcaX2',
-    client_callback: document.location.origin + '/login',
   },
   mutations: {
     TOGGLE_THEME(state) {
@@ -50,7 +47,7 @@ const store = createStore({
     setNotifications({ commit }, notifications) {
       commit('SET_NOTIFICATIONS', notifications)
     },
-    async checkLogin({ commit, state }) {
+    async checkLogin({ commit }) {
       try {
         const token = document.cookie
           .split('; ')
@@ -58,7 +55,7 @@ const store = createStore({
           ?.split('=')[1]
         if (token) {
           const response = await axios.post(
-            `${state.api_host}/auth`,
+            `${import.meta.env.VITE_API_HOST}/auth`,
             {
               action: 'check',
               token: token,
@@ -88,9 +85,6 @@ const store = createStore({
     getNotifications: (state) => state.notifications,
     isLoggedIn: (state) => state.logged === 'yes',
     getRequestToken: (state) => state.request_token,
-    getAPIHost: (state) => state.api_host,
-    getClientId: (state) => state.client_id,
-    getClientCallback: (state) => state.client_callback,
   },
 })
 
@@ -98,7 +92,6 @@ const store = createStore({
 if (typeof window !== 'undefined') {
   // Set initial theme
   document.documentElement.setAttribute('data-theme', store.state.theme)
-  console.log(import.meta.env)
   // Listen for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {

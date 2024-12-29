@@ -27,8 +27,7 @@ export default {
     const logged = store.getters.isLoggedIn
     const urlParams = new URLSearchParams(window.location.search)
     const redirectTo = urlParams.get('redirect_to') || ''
-    const client_callback = store.getters.getClientCallback
-    const client_id = store.getters.getClientId
+    const client_callback = document.location.origin + '/login'
 
     if (logged) {
       window.location.href = redirectTo || '/dashboard'
@@ -42,7 +41,7 @@ export default {
     )
     localStorage.setItem('request_state', request_state)
 
-    const githubURL = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${client_callback}&scope=read:user%20user:email&state=${request_state}`
+    const githubURL = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${client_callback}&scope=read:user%20user:email&state=${request_state}`
 
     const handleLogin = async (code) => {
       let storedState, receivedState

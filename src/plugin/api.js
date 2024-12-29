@@ -3,7 +3,6 @@ import { useStore } from "vuex";
 
 const apiCall = async (action, params={}) => {
   const store = useStore();
-  const api_host = store.getters.getAPIHost;
   const user = {
     logged_in: store.getters.isLoggedIn,
     token: store.getters.getRequestToken,
@@ -13,7 +12,7 @@ const apiCall = async (action, params={}) => {
     console.log(user);
     // Send POST request to the API param as JSON.
     response = await axios.post(
-      `${api_host}/${action}`,
+      `${import.meta.env.VITE_API_HOST}/${action}`,
       {
         data: params, user
       },
