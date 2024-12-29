@@ -74,7 +74,7 @@ const store = createStore({
               }
             }
           );
-          if (response.data.status === "success") {
+          if (response.status === "success") {
             commit("SET_LOGIN_STATUS", { logged: "yes", request_token: token });
           } else {
             commit("SET_LOGIN_STATUS", { logged: "no", request_token: "" });

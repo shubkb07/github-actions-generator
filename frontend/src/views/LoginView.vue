@@ -34,10 +34,9 @@ export default {
 			const code = urlParams.get('code');
 			if (code) {
 				const response = await apiCall('login', {'gh_code':code, 'redirect_uri':client_callback});
-				if(response.status === 'success' && response.data.status === 'success') {
+				if(response.status === 'success' && response.status === 'success') {
 					// set browser cookie and redirect to dashboard
-					console.log(response.data);
-					document.cookie = `auth=${response.data.user_token}; path=/`;
+					document.cookie = `auth=${response.user_token}; path=/`;
 					window.location.href = '/dashboard';
 				} else{
 					console.log('Error in login');
