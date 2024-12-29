@@ -19,7 +19,7 @@ const store = createStore({
     ],
     logged: "no",
     request_token: "",
-    api_host: 'https://begag.shubkb.com/api',
+    api_host: `${document.url.origin}/api`,
     client_id: "Ov23liOpEQTs0HIPcaX2",
     client_callback: document.location.origin + "/login",
   },
