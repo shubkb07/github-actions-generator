@@ -19,7 +19,7 @@ const store = createStore({
     ],
     logged: "no",
     request_token: "",
-    api_host: `${document.location.origin}/api`,
+    api_host: 'https://begag.shubkb.com/api',
     client_id: "Ov23liOpEQTs0HIPcaX2",
     client_callback: document.location.origin + "/login",
   },
@@ -63,10 +63,17 @@ const store = createStore({
           .find(row => row.startsWith("auth="))
           ?.split("=")[1];
         if (token) {
-          const response = await axios.post(`${state.api_host}/auth`, {
-            action: "check",
-            token: token
-          });
+          const response = await axios.post(
+            `${state.api_host}/auth`,
+              {
+              action: "check",
+              token: token
+            }, {
+              headers: {
+                Authorization: `Bearer lFMp9C1CLrsnfksN30h30aFjl9yk7ug9mHC8HwXtpU4bhVAEwReziDQxe8bQ2utQ`
+              }
+            }
+          );
           if (response.data.status === "success") {
             commit("SET_LOGIN_STATUS", { logged: "yes", request_token: token });
           } else {
@@ -95,7 +102,6 @@ const store = createStore({
 if (typeof window !== "undefined") {
   // Set initial theme
   document.documentElement.setAttribute("data-theme", store.state.theme);
-  console.log(process.env);
 
   // Listen for system theme changes
   window
