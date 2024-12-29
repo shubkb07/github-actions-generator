@@ -41,6 +41,7 @@ export default {
 				} else{
 					console.log('Error in login');
 					// Redirect to login page
+					console.log(redirectTo ? redirectTo : '/dashboard');
 					window.location.href = redirectTo ? redirectTo : '/dashboard';
 				}
 			} else {
