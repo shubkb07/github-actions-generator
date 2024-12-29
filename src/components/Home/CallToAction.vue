@@ -10,16 +10,15 @@
           class="p-button-primary"
           size="large"
         />
-        <PrimeButton
-          label="Watch Demo"
-          icon="pi pi-video"
-          class="p-button-outlined"
-          size="large"
-        />
+        <PrimeButton label="Watch Demo" icon="pi pi-video" class="p-button-outlined" size="large" />
       </div>
     </div>
   </section>
 </template>
+
+<script setup>
+import PrimeButton from 'primevue/button' // Import the PrimeButton component
+</script>
 
 <style scoped>
 .cta-section {

@@ -1,42 +1,19 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import lottie from "lottie-web";
-
-const animationContainer = (ref < HTMLElement) | (null > null);
-
-onMounted(() => {
-  if (animationContainer.value) {
-    lottie.loadAnimation({
-      container: animationContainer.value,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "@/animations/workflow-builder.json",
-    });
-  }
-});
+import PrimeButton from 'primevue/button' // Import the PrimeButton component
 </script>
 
 <template>
   <div class="hero-section">
-    <div class="grid">
-      <div class="col-12 md:col-6 flex align-items-center">
-        <div class="hero-content">
-          <h1>Visual GitHub Actions Workflow Builder</h1>
-          <p class="subtitle">
-            Build CI/CD pipelines with drag-and-drop simplicity. Save hours of
-            YAML configuration.
-          </p>
-          <PrimeButton
-            label="Start Building Workflows"
-            icon="pi pi-play"
-            class="cta-button p-button-primary"
-          />
-        </div>
-      </div>
-      <div class="col-12 md:col-6">
-        <div ref="animationContainer" class="interactive-demo"></div>
-      </div>
+    <div class="hero-content">
+      <h1>Visual GitHub Actions Workflow Builder</h1>
+      <p class="subtitle">
+        Build CI/CD pipelines with drag-and-drop simplicity. Save hours of YAML configuration.
+      </p>
+      <PrimeButton
+        label="Start Building Workflows"
+        icon="pi pi-play"
+        class="cta-button p-button-primary"
+      />
     </div>
   </div>
 </template>
@@ -45,6 +22,15 @@ onMounted(() => {
 .hero-section {
   background: linear-gradient(var(--background-light), white);
   padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure it takes at least the full viewport height */
+  text-align: center;
+}
+.hero-section .hero-content {
+  margin-bottom: 2rem;
 }
 .hero-section h1 {
   font-size: 3rem;
@@ -61,22 +47,12 @@ onMounted(() => {
   font-size: 1.2rem;
   padding: 1rem 2rem;
 }
-.hero-section .interactive-demo {
-  width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 @media (max-width: 768px) {
   .hero-section {
     padding: 2rem 1rem;
   }
   .hero-section h1 {
     font-size: 2rem;
-  }
-  .hero-section .interactive-demo {
-    height: 300px;
   }
 }
 </style>

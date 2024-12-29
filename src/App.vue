@@ -1,13 +1,23 @@
 <template>
   <div v-if="loading" class="loading">Loading...</div>
   <div v-else>
-    {{ isDashboard && !logged ? $router.push('/login') : ''}}
+    {{ isDashboard && !logged ? $router.push('/login') : '' }}
     <div v-if="$route.name !== 'Login'">
-      <HeaderComponent :logged=logged :isDashboard=isDashboard :isDashboardApp=isDashboardApp :isDashboardAppEdit=isDashboardAppEdit />
+      <HeaderComponent
+        :logged="logged"
+        :isDashboard="isDashboard"
+        :isDashboardApp="isDashboardApp"
+        :isDashboardAppEdit="isDashboardAppEdit"
+      />
       <div class="content">
         <router-view />
       </div>
-    <FooterComponent :logged=logged :isDashboard=isDashboard :isDashboardApp=isDashboardApp :isDashboardAppEdit=isDashboardAppEdit />
+      <FooterComponent
+        :logged="logged"
+        :isDashboard="isDashboard"
+        :isDashboardApp="isDashboardApp"
+        :isDashboardAppEdit="isDashboardAppEdit"
+      />
     </div>
     <div v-else>
       <router-view />
@@ -16,34 +26,36 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { onMounted, ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import HeaderComponent from './components/HeaderComponent.vue';
-import FooterComponent from './components/FooterComponent.vue';
+import { useStore } from 'vuex'
+import { onMounted, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import HeaderComponent from './components/HeaderComponent.vue'
+import FooterComponent from './components/FooterComponent.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   },
   setup() {
-    const store = useStore();
-    const route = useRoute();
-    const loading = ref(true);
-    const logged = ref(false);
-    const request_token = ref('');
-    const isDashboard = computed(() => route.name && route.name.startsWith('Dashboard'));
-    const isDashboardApp = computed(() => route.name && route.name.startsWith('Dashboard App'));
-    const isDashboardAppEdit = computed(() => route.name && route.name.startsWith('Dashboard App Edit'));
+    const store = useStore()
+    const route = useRoute()
+    const loading = ref(true)
+    const logged = ref(false)
+    const request_token = ref('')
+    const isDashboard = computed(() => route.name && route.name.startsWith('Dashboard'))
+    const isDashboardApp = computed(() => route.name && route.name.startsWith('Dashboard App'))
+    const isDashboardAppEdit = computed(
+      () => route.name && route.name.startsWith('Dashboard App Edit'),
+    )
 
     onMounted(async () => {
-      await store.dispatch('checkLogin');
-      loading.value = false;
-      logged.value = store.getters.isLoggedIn;
-      request_token.value = store.getters.getRequestToken;
-    });
+      await store.dispatch('checkLogin')
+      loading.value = false
+      logged.value = store.getters.isLoggedIn
+      request_token.value = store.getters.getRequestToken
+    })
 
     return {
       loading,
@@ -51,19 +63,24 @@ export default {
       request_token,
       isDashboard,
       isDashboardApp,
-      isDashboardAppEdit
-    };
-  }
+      isDashboardAppEdit,
+    }
+  },
 }
 </script>
 
 <style>
+:root {
+  --text-color-light: #111827; /* Darker color for light theme */
+  --text-color-dark: #f1f5f9; /* Lighter color for dark theme */
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color-light); /* Default to light theme color */
 }
 
 .loading {
@@ -76,5 +93,14 @@ export default {
   padding: 0px;
   margin: 0px;
   position: relative;
+}
+
+/* Dark theme styles */
+html[data-theme='dark'] {
+  --text-color: var(--text-color-dark);
+}
+
+html[data-theme='dark'] #app {
+  color: var(--text-color-dark);
 }
 </style>

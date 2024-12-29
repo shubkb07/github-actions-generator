@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue';
-import AboutView from '../views/AboutView.vue';
-import ContactView from '../views/ContactView.vue';
-import ServicesView from '../views/ServicesView.vue';
-import DashboardView from '../views/DashboardView.vue';
-import LoginView from '../views/LoginView.vue';
-import LogoutView from '../views/LogoutView.vue';
-import DashboardAppView from '../views/DashboardAppView.vue';
-import DashboardAppInView from '../views/DashboardAppInView.vue';
-import DashboardAppEditView from '../views/DashboardAppEditView.vue';
-import GuideView from '../views/GuideView.vue';
-import NotFoundView from '../views/NotFoundView.vue';
+import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import ContactView from '../views/ContactView.vue'
+import ServicesView from '../views/ServicesView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import LoginView from '../views/LoginView.vue'
+import LogoutView from '../views/LogoutView.vue'
+import DashboardAppView from '../views/DashboardAppView.vue'
+import DashboardAppInView from '../views/DashboardAppInView.vue'
+import DashboardAppEditView from '../views/DashboardAppEditView.vue'
+import GuideView from '../views/GuideView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 
 const routes = [
   {
@@ -73,12 +73,12 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView.vue,
-  }
+  },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
 })
 
 export default router

@@ -1,43 +1,39 @@
 <script setup>
+import PrimeCard from 'primevue/card' // Import the PrimeCard component
+
 const templates = [
   {
     id: 1,
-    name: "Node.js CI",
-    description: "Build and test Node.js applications with npm or yarn",
-    icon: "pi pi-code",
-    tags: ["nodejs", "javascript", "testing"],
+    name: 'Node.js CI',
+    description: 'Build and test Node.js applications with npm or yarn',
+    icon: 'pi pi-code',
+    tags: ['nodejs', 'javascript', 'testing'],
   },
   {
     id: 2,
-    name: "Docker Build",
-    description: "Build and push Docker images to registries",
-    icon: "pi pi-box",
-    tags: ["docker", "container", "registry"],
+    name: 'Docker Build',
+    description: 'Build and push Docker images to registries',
+    icon: 'pi pi-box',
+    tags: ['docker', 'container', 'registry'],
   },
   {
     id: 3,
-    name: "Static Site Deploy",
-    description: "Deploy static websites to GitHub Pages",
-    icon: "pi pi-globe",
-    tags: ["web", "static", "deployment"],
+    name: 'Static Site Deploy',
+    description: 'Deploy static websites to GitHub Pages',
+    icon: 'pi pi-globe',
+    tags: ['web', 'static', 'deployment'],
   },
-];
+]
 </script>
 
 <template>
   <section class="workflow-templates">
     <div class="container">
       <h2>Popular Workflow Templates</h2>
-      <p class="section-description">
-        Start with pre-built templates for common CI/CD scenarios
-      </p>
+      <p class="section-description">Start with pre-built templates for common CI/CD scenarios</p>
 
       <div class="grid">
-        <div
-          v-for="template in templates"
-          :key="template.id"
-          class="col-12 md:col-4 p-3"
-        >
+        <div v-for="template in templates" :key="template.id" class="col-12 md:col-4 p-3">
           <PrimeCard class="template-card">
             <template #header>
               <i :class="[template.icon, 'template-icon']"></i>
