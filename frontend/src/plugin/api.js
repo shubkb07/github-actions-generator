@@ -12,15 +12,7 @@ const apiCall = async (action, params={}) => {
   try {
     console.log(user);
     // Send POST request to the API param as JSON.
-    response = await axios.post(
-      `${api_host}/${action}`,
-      { data: params, user },
-      {
-        headers: {
-          Authorization: "Bearer lFMp9C1CLrsnfksN30h30aFjl9yk7ug9mHC8HwXtpU4bhVAEwReziDQxe8bQ2utQ"
-        }
-      }
-    );
+    response = await axios.post(`${api_host}/${action}`, { data: params, user });
     return response.data;
   } catch (error) {
     console.error("API call failed", error);
