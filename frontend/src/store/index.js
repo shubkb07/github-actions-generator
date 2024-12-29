@@ -19,7 +19,7 @@ const store = createStore({
     ],
     logged: "no",
     request_token: "",
-    api_host: `${document.url.origin}/api`,
+    api_host: `${document.location.origin}/api`,
     client_id: "Ov23liOpEQTs0HIPcaX2",
     client_callback: document.location.origin + "/login",
   },
