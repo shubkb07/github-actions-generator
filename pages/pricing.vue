@@ -1,5 +1,5 @@
 <template>
 	<div>
-		Hello
+		Pricing
 	</div>
 </template>

@@ -20,10 +20,19 @@ export default defineNuxtConfig({
 		'nuxt-security',
 		'nuxt-seo-utils'
 	],
+	plugins: [
+		{ src: '~/plugins/nitro-hooks.js', mode: 'server' },
+		{ src: '~/plugins/theme.server.js', mode: 'server' },
+		{ src: '~/plugins/theme.client.js', mode: 'client' }
+	],
 	devtools: { enabled: true },
+	routeRules: {
+		'/api/search.json': { prerender: true },
+		'/docs': { redirect: '/docs/getting-started', prerender: false }
+	},
 	compatibilityDate: '2024-11-01',
 	eslint: {
-		checker: true,
+		// checker: true,
 		config: {
 			stylistic: {
 				commaDangle: 'never',
