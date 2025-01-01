@@ -1,8 +1,9 @@
 <template>
 	<div class="flex flex-col min-h-screen">
-		Wow
+		<DocsHeader />
 		<div class="flex-grow">
 			<slot />
 		</div>
+		<DocsFooter />
 	</div>
 </template>

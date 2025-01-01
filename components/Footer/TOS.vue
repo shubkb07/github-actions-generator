@@ -1,5 +1,5 @@
 <template>
-	<p class="text-gray-500 dark:text-gray-400 text-sm">
+	<p class="text-gray-500 dark:text-gray-400 text-sm flex justify-center">
 		<span
 			v-for="(part, index) in processedTextParts"
 			:key="index"

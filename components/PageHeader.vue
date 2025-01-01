@@ -5,19 +5,19 @@
 				:title="title"
 				:subtitle="subtitle"
 			/>
-			<!-- Desktop Menu -->
+			<!-- Menu -->
 			<ClientOnly>
 				<ul
 					v-if="isMenuOpen || isDesktop"
-					class="items-center gap-x-8 hidden lg:flex"
+					class="items-center gap-x-8 lg:flex lg:flex-row flex-col lg:static absolute top-[--header-height] left-0 right-0 bg-background/75 backdrop-blur z-40 lg:z-auto p-4 lg:p-0"
 				>
 					<li
 						v-for="item in menu"
 						:key="item.text"
-						class="relative"
+						class="relative lg:border-0 border-b border-gray-200 dark:border-gray-700 w-full lg:w-auto"
 					>
 						<NuxtLink
-							class="text-sm/6 font-semibold flex items-center gap-1 hover:text-primary"
+							class="text-sm/6 font-semibold flex items-center gap-1 hover:text-primary w-full py-2 px-4 lg:py-0 lg:px-0"
 							:to="item.url"
 						>{{ item.text }}</NuxtLink>
 					</li>
@@ -69,26 +69,6 @@
 				</button>
 			</div>
 		</div>
-		<!-- Mobile Menu -->
-		<ClientOnly>
-			<div
-				v-if="isMenuOpen && !isDesktop"
-				class="absolute top-[--header-height] left-0 right-0 bg-background/75 backdrop-blur z-40 flex flex-col items-center gap-y-4 p-4"
-			>
-				<ul class="flex flex-col items-center gap-y-4 mt-4 w-full border-t border-gray-200 dark:border-gray-700">
-					<li
-						v-for="item in menu"
-						:key="item.text"
-						class="relative w-full border-b border-gray-200 dark:border-gray-700"
-					>
-						<NuxtLink
-							class="text-sm/6 font-semibold flex items-center gap-1 hover:text-primary w-full py-2 px-4"
-							:to="item.url"
-						>{{ item.text }}</NuxtLink>
-					</li>
-				</ul>
-			</div>
-		</ClientOnly>
 	</header>
 	<!-- Content Blur Overlay -->
 	<div
