@@ -22,11 +22,17 @@ export default defineNuxtConfig({
 	],
 	plugins: [
 		{ src: '~/plugins/nitro-hooks.js', mode: 'server' },
+		{ src: '~/plugins/auth.server.js', mode: 'server' },
 		{ src: '~/plugins/theme.server.js', mode: 'server' },
 		{ src: '~/plugins/theme.client.js', mode: 'client' }
 	],
+
 	devtools: { enabled: true },
-	routeRules: {
+	runtimeConfig: {
+		apiUrl: process.env.API_URL || '',
+		bearerToken: process.env.BEARER_TOKEN || ''
+	},	routeRules: {
+		'/api/search.json': { prerender: true },
 		'/docs': { redirect: '/docs/getting-started', prerender: false }
 	},
 	compatibilityDate: '2024-11-01',

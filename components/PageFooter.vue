@@ -28,10 +28,6 @@
 
 <script setup>
 import { defineProps } from 'vue'
-import FooterMenu from './Footer/Menu.vue'
-import FooterForm from './Footer/Form.vue'
-import FooterTOS from './Footer/TOS.vue'
-import FooterSocial from './Footer/Social.vue'
 
 const _props = defineProps({
 	menu: {

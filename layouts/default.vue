@@ -25,6 +25,8 @@
 <script setup>
 import { ref } from 'vue'
 
+const auth = useState('auth')
+
 const title = ref('Nuxt UI Pro')
 const subtitle = ref('')
 const menu = ref([
@@ -33,7 +35,7 @@ const menu = ref([
 	{ text: 'Blog', url: '/blog' }
 ])
 const login = ref({
-	logged: false,
+	logged: auth.value.logged_in,
 	signin: {
 		text: 'Login',
 		url: '/login'
@@ -52,28 +54,28 @@ const footerMenu = ref([
 	{
 		name: 'Resources',
 		links: [
-			{ text: 'Help center', url: '/help-center' },
-			{ text: 'Docs', url: '/docs' },
-			{ text: 'Roadmap', url: '/roadmap' },
-			{ text: 'Changelog', url: '/changelog' }
+			// { text: 'Help center', url: '/help-center' },
+			{ text: 'Docs', url: '/docs' }
+			// { text: 'Roadmap', url: '/roadmap' },
+			// { text: 'Changelog', url: '/changelog' }
 		]
 	},
 	{
 		name: 'Features',
 		links: [
-			{ text: 'Affiliates', url: '/affiliates' },
-			{ text: 'Portal', url: '/portal' },
-			{ text: 'Jobs', url: '/jobs' },
-			{ text: 'Sponsors', url: '/sponsors' }
+			// { text: 'Affiliates', url: '/affiliates' },
+			// { text: 'Portal', url: '/portal' },
+			// { text: 'Jobs', url: '/jobs' },
+			// { text: 'Sponsors', url: '/sponsors' }
 		]
 	},
 	{
 		name: 'Company',
 		links: [
-			{ text: 'About', url: '/about' },
-			{ text: 'Pricing', url: '/pricing' },
-			{ text: 'Careers', url: '/careers' },
-			{ text: 'Blog', url: '/blog' }
+			{ text: 'About', url: '/about' }
+			// { text: 'Pricing', url: '/pricing' },
+			// { text: 'Careers', url: '/careers' },
+			// { text: 'Blog', url: '/blog' }
 		]
 	}
 ])
