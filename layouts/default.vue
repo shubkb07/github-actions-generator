@@ -47,6 +47,18 @@ const login = ref({
 		text: 'Dashboard',
 		url: '/dashboard',
 		display: true
+	},
+	profile: {
+		display: true,
+		pic: auth.value.userpic,
+		email: auth.value.email,
+		username: auth.value.username,
+		name: auth.value.name,
+		links: [
+			{ text: 'Account', url: '/app/account' },
+			{ text: 'Profile', url: '/app/profile' },
+			{ text: 'Settings', url: '/app/settings' }
+		]
 	}
 })
 

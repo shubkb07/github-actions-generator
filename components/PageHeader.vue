@@ -48,9 +48,38 @@
 							name="heroicons:arrow-right-20-solid"
 						/>
 					</NuxtLink>
+					<div v-if="loginConfig.logged && loginConfig.profile.display" class="relative" ref="profileMenuRef">
+						<img
+							@click="toggleProfileMenu"
+							:src="loginConfig.profile.pic"
+							alt="Profile Picture"
+							class="w-8 h-8 rounded-full cursor-pointer select-none"
+							draggable="false"
+						/>
+						<div v-if="isProfileMenuOpen" class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50">
+							<ul>
+								<li v-for="link in loginConfig.profile.links" :key="link.text" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+									<NuxtLink :to="link.url" class="block text-gray-700 dark:text-gray-200 text-sm">{{ link.text }}</NuxtLink>
+								</li>
+							</ul>
+							<div class="p-4 border-t border-gray-200 dark:border-gray-700 flex items-center">
+								<img
+									:src="loginConfig.profile.pic"
+									alt="Profile Picture"
+									class="w-8 h-8 rounded-full mr-2 select-none"
+									draggable="false"
+								/>
+								<div>
+									<p class="font-semibold text-sm">{{ loginConfig.profile.name || loginConfig.profile.email || '@' + loginConfig.profile.username }}</p>
+									<p v-if="loginConfig.profile.email && loginConfig.profile.username" class="text-xs text-gray-500 dark:text-gray-400">{{ loginConfig.profile.email }}</p>
+									<p v-if="loginConfig.profile.email && loginConfig.profile.username" class="text-xs text-gray-500 dark:text-gray-400">{{ '@' + loginConfig.profile.username }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
 					<NuxtLink
 						v-if="loginConfig.logged || !loginConfig.signup.display"
-						class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:cursor-not-allowed aria-disabled:opacity-75 flex-shrink-0 font-medium rounded-full text-sm gap-x-2 px-3 py-2 shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 aria-disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white dark:aria-disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 items-center hidden lg:flex"
+						class="ml-4 focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:cursor-not-allowed aria-disabled:opacity-75 flex-shrink-0 font-medium rounded-full text-sm gap-x-2 px-3 py-2 shadow-sm text-white dark:text-gray-900 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-900 aria-disabled:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:disabled:bg-white dark:aria-disabled:bg-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 items-center hidden lg:flex"
 						:to="loginConfig.logged ? loginConfig.onLogin.url : loginConfig.signin.url"
 					>
 						{{ loginConfig.logged ? loginConfig.onLogin.text : loginConfig.signin.text }}
@@ -80,7 +109,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, defineProps, computed } from 'vue'
-import { useWindowSize } from '@vueuse/core'
+import { useWindowSize, onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
 	title: {
@@ -113,6 +142,18 @@ const defaultLoginConfig = {
 		display: true,
 		icon: true
 	},
+	profile: {
+		display: true,
+		pic: '/logo.png',
+		email: '',
+		username: '',
+		name: '',
+		links: [
+			{ text: 'Account', url: '/app/account' },
+			{ text: 'Profile', url: '/app/profile' },
+			{ text: 'Settings', url: '/app/settings' }
+		]
+	},
 	onLogin: {
 		text: 'Dashboard',
 		url: '/dashboard',
@@ -128,11 +169,16 @@ const loginConfig = computed(() => {
 })
 
 const isMenuOpen = ref(false)
+const isProfileMenuOpen = ref(false)
 const { width } = useWindowSize()
 const isDesktop = ref(width.value >= 1024)
 
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value
+}
+
+const toggleProfileMenu = () => {
+	isProfileMenuOpen.value = !isProfileMenuOpen.value
 }
 
 const handleResize = () => {
@@ -141,6 +187,11 @@ const handleResize = () => {
 		isMenuOpen.value = false
 	}
 }
+
+const profileMenuRef = ref(null)
+onClickOutside(profileMenuRef, () => {
+	isProfileMenuOpen.value = false
+})
 
 onMounted(() => {
 	window.addEventListener('resize', handleResize)

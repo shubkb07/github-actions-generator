@@ -3,6 +3,7 @@ import { defineNuxtPlugin, useRuntimeConfig, useCookie, useState } from '#app'
 
 export default defineNuxtPlugin(async () => {
 	const auth = useState('auth', () => ({
+		userpic: null,
 		email: null,
 		username: null,
 		name: null,
@@ -31,28 +32,14 @@ export default defineNuxtPlugin(async () => {
 			})
 
 			if (response.status === 'success') {
+				auth.value.userpic = '/image/' + response.gh_id
 				auth.value.email = response.email
 				auth.value.username = response.username
 				auth.value.name = response.name
 				auth.value.logged_in = true
-			} else {
-				// Handle unsuccessful authentication if needed
-				auth.value = {
-					email: null,
-					username: null,
-					name: null,
-					logged_in: false
-				}
 			}
 		} catch (error) {
 			console.error(`[auth.js] ${error.message}`)
-			// Optionally, reset auth state on error
-			auth.value = {
-				email: null,
-				username: null,
-				name: null,
-				logged_in: false
-			}
 		}
 	}
 })
