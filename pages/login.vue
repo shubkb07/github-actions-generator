@@ -17,5 +17,4 @@
 
 <script setup>
 const loginURL = useState('auth').value.gh_login_url
-console.log(loginURL)
 </script>

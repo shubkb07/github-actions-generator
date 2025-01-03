@@ -50,11 +50,10 @@ export default defineEventHandler(async (event) => {
 
 		// Return the image buffer as a Node.js Buffer
 		return Buffer.from(imageBuffer)
-	} catch (error) {
-		console.error('[image route] Error fetching image:', error)
+	} catch (e) {
 		return sendError(
 			event,
-			createError({ statusCode: 500, statusMessage: 'Internal Server Error' })
+			createError({ statusCode: 500, statusMessage: 'Internal Server Error: ' + e.message })
 		)
 	}
 })

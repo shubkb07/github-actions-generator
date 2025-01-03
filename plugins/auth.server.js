@@ -59,8 +59,6 @@ export default defineNuxtPlugin(async () => {
 				body: JSON.stringify(body)
 			})
 
-			console.log('request: ', response)
-
 			if (response.status === 'success') {
 				// If auth.user_token is set, then set user cookie auth to its value and redirect.
 				if (response.user_token) {
