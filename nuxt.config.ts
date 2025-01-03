@@ -105,10 +105,6 @@ export default defineNuxtConfig({
 			],
 			clientsClaim: true,
 			skipWaiting: true
-		},
-		devOptions: {
-			enabled: true,
-			type: 'module'
 		}
 	}
 })
