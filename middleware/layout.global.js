@@ -9,6 +9,9 @@ export default defineNuxtRouteMiddleware((to) => {
 	} else if (to.path.startsWith('/app')) {
 		// Set the layout to 'app'
 		setPageLayout('app')
+	} else if (to.path.startsWith('/login')) {
+		// Set the layout to 'sign'
+		setPageLayout('sign')
 	} else {
 		// Set the layout to 'default'
 		setPageLayout('default')

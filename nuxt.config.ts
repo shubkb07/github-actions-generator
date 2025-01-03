@@ -30,7 +30,8 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 	runtimeConfig: {
 		apiUrl: process.env.API_URL || '',
-		bearerToken: process.env.BEARER_TOKEN || ''
+		bearerToken: process.env.BEARER_TOKEN || '',
+		ghClientId: process.env.GH_CLIENT_ID || ''
 	},	routeRules: {
 		'/api/search.json': { prerender: true },
 		'/docs': { redirect: '/docs/getting-started', prerender: false }

@@ -48,18 +48,32 @@
 							name="heroicons:arrow-right-20-solid"
 						/>
 					</NuxtLink>
-					<div v-if="loginConfig.logged && loginConfig.profile.display" class="relative" ref="profileMenuRef">
+					<div
+						v-if="loginConfig.logged && loginConfig.profile.display"
+						ref="profileMenuRef"
+						class="relative"
+					>
 						<img
-							@click="toggleProfileMenu"
 							:src="loginConfig.profile.pic"
 							alt="Profile Picture"
 							class="w-8 h-8 rounded-full cursor-pointer select-none"
 							draggable="false"
-						/>
-						<div v-if="isProfileMenuOpen" class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50">
+							@click="toggleProfileMenu"
+						>
+						<div
+							v-if="isProfileMenuOpen"
+							class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50"
+						>
 							<ul>
-								<li v-for="link in loginConfig.profile.links" :key="link.text" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-									<NuxtLink :to="link.url" class="block text-gray-700 dark:text-gray-200 text-sm">{{ link.text }}</NuxtLink>
+								<li
+									v-for="link in loginConfig.profile.links"
+									:key="link.text"
+									class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+								>
+									<NuxtLink
+										:to="link.url"
+										class="block text-gray-700 dark:text-gray-200 text-sm"
+									>{{ link.text }}</NuxtLink>
 								</li>
 							</ul>
 							<div class="p-4 border-t border-gray-200 dark:border-gray-700 flex items-center">
@@ -68,11 +82,23 @@
 									alt="Profile Picture"
 									class="w-8 h-8 rounded-full mr-2 select-none"
 									draggable="false"
-								/>
+								>
 								<div>
-									<p class="font-semibold text-sm">{{ loginConfig.profile.name || loginConfig.profile.email || '@' + loginConfig.profile.username }}</p>
-									<p v-if="loginConfig.profile.email && loginConfig.profile.username" class="text-xs text-gray-500 dark:text-gray-400">{{ loginConfig.profile.email }}</p>
-									<p v-if="loginConfig.profile.email && loginConfig.profile.username" class="text-xs text-gray-500 dark:text-gray-400">{{ '@' + loginConfig.profile.username }}</p>
+									<p class="font-semibold text-sm">
+										{{ loginConfig.profile.name || loginConfig.profile.email || '@' + loginConfig.profile.username }}
+									</p>
+									<p
+										v-if="loginConfig.profile.email && loginConfig.profile.username"
+										class="text-xs text-gray-500 dark:text-gray-400"
+									>
+										{{ loginConfig.profile.email }}
+									</p>
+									<p
+										v-if="loginConfig.profile.email && loginConfig.profile.username"
+										class="text-xs text-gray-500 dark:text-gray-400"
+									>
+										{{ '@' + loginConfig.profile.username }}
+									</p>
 								</div>
 							</div>
 						</div>
