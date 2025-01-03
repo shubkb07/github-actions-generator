@@ -78,7 +78,7 @@ export default defineNuxtPlugin(async () => {
 						navigateTo('/app')
 					}
 				}
-				auth.value.userpic = '/image/' + response.gh_id
+				auth.value.userpic = '/image/' + response.gh_id + '?s=100'
 				auth.value.email = response.email
 				auth.value.username = response.username
 				auth.value.name = response.name
