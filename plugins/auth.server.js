@@ -9,34 +9,36 @@ export default defineNuxtPlugin(async () => {
 		name: null,
 		logged_in: false,
 		worked: false,
-		gh_login_url: ''
+		gh_login_url: '',
+		login_error: ''
 	}))
 
-	// get param 'code' from url
+	// Get the current route and query parameters
 	const route = useRoute()
 	const code = route.query.code
 	const authCookie = useCookie('auth')
-	// get current request URL without query params
 	const currentRequestURL = useRequestURL().origin + useRequestURL().pathname
 	const config = useRuntimeConfig()
-	const apiUrl = config.apiUrl // Private runtime config
-	const bearerToken = config.bearerToken // Private runtime config
+	const apiUrl = config.apiUrl
+	const bearerToken = config.bearerToken
 
+	// Handle logout
 	if (useRequestURL().pathname === '/logout') {
 		authCookie.value = ''
 		navigateTo('/login')
 	}
 
-	const body = {
-		action: 'login'
-	}
+	const body = { action: 'login' }
 	if (authCookie.value) {
 		body.token = authCookie.value
 	}
 	if (code && useRequestURL().pathname === '/login') {
 		body.code = code
 		body.redirect_uri = currentRequestURL
-	} else if (useRequestURL().pathname === '/login') {
+	}
+
+	// Set GitHub login URL
+	if (useRequestURL().pathname === '/login') {
 		const redirect_to = route.query.redirect_to
 		auth.value.gh_login_url = 'https://github.com/login/oauth/authorize?client_id=' + process.env.GH_CLIENT_ID
 		if (redirect_to) {
@@ -44,10 +46,10 @@ export default defineNuxtPlugin(async () => {
 		}
 	}
 
+	// Perform login if token or code is present
 	if ((body.token || body.code) && !auth.value.worked) {
 		auth.value.worked = true
 		try {
-			// Fetch auth data from the API
 			const response = await $fetch(`${apiUrl}/login`, {
 				method: 'POST',
 				headers: {
@@ -55,12 +57,11 @@ export default defineNuxtPlugin(async () => {
 					'Authorization': `${bearerToken}`,
 					'Origin': currentRequestURL
 				},
-				credentials: 'include', // Include cookies in the request
+				credentials: 'include',
 				body: JSON.stringify(body)
 			})
 
 			if (response.status === 'success') {
-				// If auth.user_token is set, then set user cookie auth to its value and redirect.
 				if (response.user_token) {
 					authCookie.value = response.user_token
 				}
@@ -83,8 +84,12 @@ export default defineNuxtPlugin(async () => {
 				auth.value.username = response.username
 				auth.value.name = response.name
 				auth.value.logged_in = true
+			} else {
+				authCookie.value = ''
+				auth.value.login_error = response.message || 'Login failed. Please try again.'
 			}
 		} catch (error) {
+			auth.value.login_error = `[auth.js] ${error.message}`
 			console.error(`[auth.js] ${error.message}`)
 		}
 	}

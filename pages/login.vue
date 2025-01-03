@@ -11,10 +11,18 @@
 				/>
 				<span>Login with GitHub</span>
 			</NuxtLink>
+			<div v-if="loginError" class="mt-4 text-red-500">
+				{{ loginError }}
+			</div>
 		</div>
 	</main>
 </template>
 
 <script setup>
-const loginURL = useState('auth').value.gh_login_url
+// Get the auth state
+const auth = useState('auth')
+
+// Extract login URL and error message from auth state
+const loginURL = auth.value.gh_login_url
+const loginError = auth.value.login_error
 </script>
