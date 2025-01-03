@@ -77,18 +77,19 @@ export default defineNuxtConfig({
 			start_url: process.env.PWA_START_URL || '/',
 			icons: [
 				{
-					src: process.env.PWA_ICON_192 || '/icon-192x192.png',
+					src: '/android-chrome-192x192.png',
 					sizes: '192x192',
 					type: 'image/png'
 				},
 				{
-					src: process.env.PWA_ICON_512 || '/icon-512x512.png',
+					src: '/android-chrome-512x512.png',
 					sizes: '512x512',
 					type: 'image/png'
 				}
 			]
 		},
 		workbox: {
+			navigateFallback: '/',
 			runtimeCaching: [
 				{
 					urlPattern: '/*',
@@ -101,7 +102,13 @@ export default defineNuxtConfig({
 						}
 					}
 				}
-			]
+			],
+			clientsClaim: true,
+			skipWaiting: true
+		},
+		devOptions: {
+			enabled: true,
+			type: 'module'
 		}
 	}
 })
