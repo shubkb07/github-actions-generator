@@ -11,7 +11,10 @@
 				/>
 				<span>Login with GitHub</span>
 			</NuxtLink>
-			<div v-if="loginError" class="mt-4 text-red-500">
+			<div
+				v-if="loginError"
+				class="mt-4 text-red-500"
+			>
 				{{ loginError }}
 			</div>
 		</div>
